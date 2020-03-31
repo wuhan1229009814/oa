@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a>首页</a>
+            <a>日用资料</a>
+            <span>意向客户信息列表</span>
+        </div>
+        <!-- 筛选 --> 
+        <div class="shuaix">
+            <div class="left">
+                <b>意向：</b>
+                <select>   
+                    <option value="全部">全部</option>   
+                    <option value="大">大</option>   
+                    <option value="中">中</option>   
+                    <option value="小">小</option>    
+                </select>
+            </div>
+            <div class="left" style="margin-left:20px;">
+                <b>员工：</b>
+                <select>   
+                    <option value="全部">全部</option>   
+                    <option value="大师">大师</option>   
+                    <option value="阿黄">阿黄</option>   
+                    <option value="罗雀">罗雀</option>    
+                </select>
+            </div>
+            <div class="center">统计：【大：20 中：30 小：60】</div>
+            <div class="right">
+                <input type="text" placeholder="请输入关键词查询">
+                <a href="#">查询</a>
+            </div>
+        </div>
+        <!-- 下面写内容 -->
+        <table class="layui-table" lay-filter="mylist" lay-size="lg">
+            <thead>
+                <tr> 
+                    <th lay-data="{field:'yx', align:'center',width:60}">意向</th>
+                    <th lay-data="{field:'time',align:'center', minWidth:170}">添加时间</th>
+                    <th lay-data="{field:'www',align:'center',minWidth:130}">客户网址</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:260}">单位名称</th>
+                    <th lay-data="{field:'user',align:'center',width:130}">联系人</th>
+                    <th lay-data="{field:'tel',align:'center',width:130}">联系电话</th>
+                    <th lay-data="{field:'result',align:'center',minWidth:260}">通话结果</th>
+                    <th lay-data="{field:'addr',align:'center',minWidth:260}">公司地址</th> 
+                </tr> 
+            </thead>
+            <tbody>
+                <tr> 
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵州九树子美容服务有限公司</td>
+                    <td>张经理 杨经理</td>
+                    <td>18788899888</td>
+                    <td>考虑一下，意向挺大的，继续跟进</td>
+                    <td>贵阳市金阳高新区产业园2号厂房</td>
+                </tr>
+                <tr>  
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵阳新众科技有限公司</td>
+                    <td>王金彦</td>
+                    <td>0851-5891859 </td>
+                    <td></td>
+                    <td>贵阳市金阳新区石林南路</td>
+                </tr>
+                <tr> 
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵州九树子美容服务有限公司</td>
+                    <td>张经理</td>
+                    <td>18788899888</td>
+                    <td>自己做了</td>
+                    <td>贵阳市南明区狮峰路68号B幢5层1号</td>
+                </tr>
+                <tr>  
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵州好万家保洁有限公司</td>
+                    <td>肖慈敏 </td>
+                    <td>18788899888</td>
+                    <td>已经签id号</td>
+                    <td>金阳金翠湾</td>
+                </tr> 
+                <tr> 
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵州九树子美容服务有限公司</td>
+                    <td>张经理</td>
+                    <td>18788899888</td>
+                    <td>考虑一下，意向挺大的，继续跟进</td>
+                    <td>贵阳市金阳高新区产业园2号厂房</td>
+                </tr>
+                <tr>  
+                    <td>大</td>
+                    <td>2019-05-30 16:18:20</td>
+                    <td>www.gykbgk.com</td>
+                    <td>贵州九树子美容服务有限公司</td>
+                    <td>张经理</td>
+                    <td>18788899888</td>
+                    <td>考虑一下，意向挺大的，继续跟进</td>
+                    <td>贵阳市金阳高新区产业园2号厂房</td>
+                </tr> 
+            </tbody>  
+        </table>
+
+    </div>
+
+    <!-- layui js -->
+    <script src="layui/layui.js"></script>
+    
+</body>
+
+</html>
+<script type="text/javascript">
+	//静态表格
+    layui.use('table',function(){
+    	var table = layui.table;
+		//转换静态表格
+		table.init('mylist', {
+		  height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+		  ,count: 50 //数据总数 服务端获得
+		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+		  ,page:true //开启分页
+		  //,toolbar: 'default'//工具栏
+		  ,defaultToolbar:['filter', 'exports']
+		  ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+		});  
+	}); 
+</script> 

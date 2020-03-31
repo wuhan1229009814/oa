@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>OA管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="/static/js/html5.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="/static/js/Tdrag.min.js"></script>
+
+</head>
+
+<body>
+	<!-- ie过低提示升级 -->
+	<!--[if lt IE 9]>
+		<style>
+			.upgrade{text-align:center;line-height: 40px; position:fixed; width:100%; height:100%; background:#fff; z-index:9999;}
+			.upgrade h2{margin:100px 0 50px 0;}
+		</style>
+		<div class="upgrade">
+			<h2>天啦！你的浏览器版本好低，看不到T_T，请升级浏览器再浏览吧^_^Y！</h2>
+			<h3>
+				<p>360浏览器下载：<a target="_blank" href="http://se.360.cn/">http://se.360.cn/</a></p>
+				<p>谷歌浏览器下载：<a target="_blank" href="https://www.google.cn/chrome/">https://www.google.cn/chrome/</a></p>
+				<p>IE浏览器下载：<a target="_blank" href="https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads">https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads</a></p>
+			</h3>
+		</div>
+	<![endif]-->
+	<div class="bg_box"
+		 style="background: url(/static/imgs/bg_default.jpg) no-repeat center center; background-size: cover;"></div>
+	<div class="container">
+		<div class="top_box">
+	        <div class="logo">
+	        	<img src="/static/imgs/logo_touming.gif">
+	        	<span></span>
+	        	<b><img src="/static/imgs/word.png" /></b>
+	        </div>
+	        <div class="top_icon">
+	        	<a href="/index/index"><img src="/static/imgs/top_home.png"></a>
+	        	<a href="/index/childapp=index&info=my_info"><img src="/static/imgs/top_person.png"></a>
+	        	<a href="/user/logout"><img src="/static/imgs/top_exit.png"></a>
+	        </div>
+	    </div>
+	    <div class="content_box">
+	    	<div class="left_box">
+	    		<div class="head">
+	    			<i><img src="{{management.img}}" /></i><!-- 注释去间隔
+	    	     --><dl>
+	    				<dd><b>姓名：</b>{{management.name}}</dd>
+	    				<dd><b>部门：</b>{{management.dep_name}}</dd>
+	    				<dd><b>职务：</b>{{management.position_name}}</dd>
+	    				<dd><b>工号：</b>{{management.job_no}}</dd>
+	    			</dl>
+	    		</div>
+	    		<div class="menu" id="style-3">
+	    			<ul>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon01.png">
+		    					<a href="/index/childapp=address_book&info=list">通讯录</a>
+		    				</h2>
+
+	    				</li>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon02.png">
+		    					<a href="/index/childapp=timebook&info=list">考勤记录</a>
+		    				</h2>
+
+	    				</li>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon03.png">
+		    					<a href="/index/childapp=notice&info=list">通知公告</a>
+		    				</h2>
+	    				</li>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon04.png">
+		    					<a>工作报告</a>
+		    					<em><img src="/static/imgs/jt_left.png"></em>
+		    				</h2>
+	    					<dl>
+	    						<dd><a href="/index/childapp=report&info=list">查询报告</a></dd>
+	    						<dd><a href="/index/childapp=report&info=add">新建报告</a></dd>
+	    					</dl>
+	    				</li>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon05.png">
+		    					<a>部门员工管理</a>
+		    					<em><img src="/static/imgs/jt_left.png"></em>
+		    				</h2>
+	    					<dl>
+								{% if management.power == '1' %}
+								<dd><a href="/index/childapp=department&info=list">部门管理</a></dd>
+	    						<dd><a href="/index/childapp=management&info=list">员工管理</a></dd>
+								{% else %}
+								<dd><a href="/index/childapp=management&info=list">员工查询</a></dd>
+								{% endif %}
+	    					</dl>
+	    				</li>
+	    				<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon06.png">
+		    					<a>个人设置</a>
+		    					<em><img src="/static/imgs/jt_left.png"></em>
+		    				</h2>
+	    					<dl>
+	    						<dd><a href="/index/childapp=index&info=my_ip" >IP锁定</a></dd>
+	    						<dd><a href="/index/childapp=index&info=my_info" >个人信息</a></dd>
+	    						<dd><a href="/index/childapp=index&info=my_mim">密码修改</a></dd>
+<!--	    						<dd><a href="/index/childapp=index&info=my_bj">背景设置</a></dd>-->
+	    					</dl>
+	    				</li>
+						<li>
+	    					<h2>
+		    					<img src="/static/imgs/sm_icon06.png">
+		    					<a>游戏畅玩</a>
+		    					<em><img src="/static/imgs/jt_left.png"></em>
+		    				</h2>
+							<dl>
+	    						<dd><a href="/game/index" target="_blank">愤怒的小鸡鸡</a></dd>
+
+	    					</dl>
+
+	    				</li>
+	    			</ul>
+	    			<script type="text/javascript">
+	    				$(function(){
+	    					var n=0;
+	    					$(".left_box .menu ul li").mouseover(
+	    						function(){
+	    							n=$(this).index();
+	    						}
+	    					)
+	    					$(".left_box .menu ul li h2").click(
+	    						function(){
+	    							$(".left_box .menu ul li").eq(n).find("dl").slideToggle();
+	    							$(".left_box .menu ul li").eq(n).siblings().find("dl").slideUp()
+
+	    							if ($(this).find("em").hasClass("xz")) {
+										$(this).find("em").removeClass("xz")
+										$(this).find("em").addClass("xz01")
+									}else{
+										$(this).find("em").addClass("xz")
+										$(this).find("em").removeClass("xz01")
+									}
+									if ($(".left_box .menu ul li").eq(n).siblings().find("em").hasClass("xz")) {
+										$(".left_box .menu ul li").eq(n).siblings().find("em").removeClass("xz")
+									}
+	    						}
+	    					)
+	    				})
+	    			</script>
+	    		</div>
+	    	</div>
+	    	<div class="right_box">
+	    		<div class="icon_box">
+	    			<ul class="boxList">
+	    				<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_01.png">
+	    						<b></b>
+	    					</i>
+		    				<a href="/index/childapp=address_book&info=list" target="_self">
+		    					<span>通讯录</span>
+		    				</a>
+		    			</li>
+		    			<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_02.png">
+	    						<b></b>
+	    					</i>
+		    				<a href="/index/childapp=timebook&info=list" target="_self">
+		    					<span>考勤记录</span>
+		    				</a>
+		    			</li>
+		    			<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_03.png">
+	    						<b></b>
+	    					</i>
+		    				<a href="/index/childapp=notice&info=list" target="_self">
+		    					<span>通知公告</span>
+		    				</a>
+		    			</li>
+		    			<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_04.png">
+	    						<b></b>
+	    					</i>
+		    				<a href="/index/childapp=report&info=list" target="_self">
+		    					<span>工作报告</span>
+		    				</a>
+		    			</li>
+		    			<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_05.png">
+	    						<b></b>
+	    					</i>
+							<a href="/index/childapp=management&info=list" target="_self">
+								{% if management.power == '1' %}
+								<span>员工管理</span>
+								{% else %}
+								<span>员工查询</span>
+								{% endif %}
+							</a>
+		    			</li>
+		    			<li class="list">
+	    					<i>
+	    						<img src="/static/imgs/icon_06.png">
+	    						<b></b>
+	    					</i>
+	    					<a href="/index/childapp=index&info=my_info" target="_self">
+		    					<span>个人设置</span>
+		    				</a>
+		    			</li>
+
+	    			</ul>
+
+	    			<script>
+						jQuery(function(){
+						    //第九个例子的拖拽
+						    $(".list").Tdrag({
+						        scope:".boxList",
+						        pos:true,
+						        dragChange:true,
+						        changeMode:"sort",
+						        moveClass:"abc"
+						    });
+						})
+					</script>
+	    		</div>
+	    		<!-- iconbox end -->
+	    		<div class="info_box">
+	    			<div class="box battle">
+	    				<div class="tit">
+	    					<a class="on">人员分布</a><!-- 注释去间隔
+	    	   注释去间隔 --><div class="scrollnews">
+	    	   					<span>WangID提醒您：</span>
+	    	   					<ul>
+									{% for notice in notice_list %}
+	    	   						<li title="{{ notice.title }}">
+										<a href="/index/childapp=notice&info=notice&id={{notice.id}}" target="_self" style="width: 220px">
+		    								<b>{{ notice.title }}</b>
+		    							</a>
+	    	   						</li>
+									{% endfor %}
+
+	    	   					</ul>
+	    	   					<script type="text/javascript">
+	    	   						$(document).ready(function(){
+					                    //滚动文字
+					                    function runtxt(){
+					                        $(".scrollnews ul").animate({marginTop:"-54px"},300,
+					                            function(){
+					                                $(".scrollnews ul li:last").after($(".scrollnews ul li:first"))
+					                                $(".scrollnews ul").css("margin-top",0)
+					                            }
+					                        )
+					                    }
+					                    $(".scrollnews ul li a").mouseenter(
+					                        function(){
+					                            clearInterval(timer)
+					                        }
+					                    )
+					                    $(".scrollnews ul li a").mouseleave(
+					                        function(){
+					                            timer=setInterval(runtxt,3000)
+					                        }
+					                    )
+					                    timer=setInterval(runtxt,3000)
+					                })
+	    	   					</script>
+	    	   				</div>
+	    				</div>
+	    				<div class="conbox">
+	    					<div class="con">
+	    						<h1>公司人员分布展示图</h1>
+	    						<div class="countbox">
+	    							<div class="count">
+	    								<span class="x"><img src="/static/imgs/X.png"> x/部门名称</span>
+	    								<span class="y"><img src="/static/imgs/Y.png"> y/人数</span>
+	    								<ul>
+	    									{% for item in dep_manage_count_list %}
+											<li class="{{item.department_id}}"
+												style="height: calc({{item.department_id__count}}% * 2); background: {{item.dep_name__count}};"></li>
+	    									{% endfor %}
+	    								 <!-- 计算出每个大区所占百分比 以两倍高度展示，所占比超过百分之五十的，超出百分百以外的隐藏 -->
+	    								</ul>
+	    							</div>
+	    							<div class="num">
+										{% for item in dep_manage_count_list %}
+											<a>{{item.dep_name}}</a>
+										{% endfor %}
+
+
+	    							</div>
+	    						</div>
+	    					</div>
+	    					
+	    				</div>
+    					<script type="text/javascript">
+    						$(function(){
+
+    							var n=0;
+    							$(".right_box .info_box .battle .tit a").mouseover(
+    								function(){
+    									n=$(this).index();
+    									$(this).addClass("on")
+    									$(this).siblings().removeClass("on")
+    									$(".right_box .info_box .battle .con").hide().eq(n).fadeIn()
+    								}
+    							)
+    						})
+    					</script>
+	    			</div>
+	    			<div class="box honor">
+	    				<div class="tit">
+	    					<a class="on">欢迎新入职员工</a><!-- 注释去间隔
+	    				 -->
+	    				</div>
+	    				<div class="conbox">
+	    					<div class="con">
+	    						<div>
+		    						<ul>
+
+										{% for item in management_list %}
+
+		    							<li>
+		    								<i><img src="{{item.img}}"></i>
+		    								<dl>
+		    									<dt>{{item.name}}</dt>
+		    									<dd>所属部门：{{item.dep_name}}</dd>
+		    								</dl>
+		    								<b><img src="/static/imgs/honor_1.png"></b>
+		    							</li>
+										{% endfor %}
+
+
+		    						</ul>
+		    					</div>
+		    					<p>干的不错，小伙伴们继续加油哦！</p>
+	    					</div>
+
+	    				</div>
+	    				<script type="text/javascript">
+    						$(function(){
+    							var n=0;
+    							$(".right_box .info_box .honor .tit a").mouseover(
+    								function(){
+    									n=$(this).index();
+    									$(this).addClass("on");
+    									$(this).siblings().removeClass("on");
+    									$(".right_box .info_box .honor .con").hide().eq(n).fadeIn()
+    								}
+    							)
+    						})
+    					</script>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+    </div>
+</body>
+
+</html>
+

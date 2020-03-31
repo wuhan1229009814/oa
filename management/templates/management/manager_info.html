@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="名榜,wangid">
+	<title>WangID办公管理系统</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/static/css/style.css">
+	 <link rel="stylesheet" href="/static/css/children.css">
+
+	<!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- layui css -->
+
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="/static/css/laydate.css" media="all">
+	<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+	<!-- layui js -->
+	<script src="/static/js/layui.js"></script>
+	<script src="/static/js/layui.all.js"></script>
+</head>
+
+<body>
+<div class="wangid_conbox">
+	<!-- 当前位置 -->
+	<div class="zy_weizhi bord_b">
+		<i class="fa fa-home fa-3x"></i>
+		<a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+            <span>公司员工列表</span>
+	</div>
+	<!-- 筛选 -->
+	<form class="layui-form" action="/management/search" method="post">
+		<div class="layui-form-item">
+
+
+    <div class="layui-inline">
+      <label class="layui-form-label">员工姓名</label>
+      <div class="layui-input-inline">
+        <input type="text" name="name" value="{{name}}"  lay-verify="" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">员工工号</label>
+      <div class="layui-input-inline">
+        <input type="text" name="job_no" value="{{job_no}}" lay-verify="" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">开始日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="start_time" id="start_time" value="{{start_time}}" lay-verify="" placeholder="yyyy-MM-dd"
+			   autocomplete="off"
+			   class="layui-input">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">截止日期</label>
+      <div class="layui-input-inline">
+        <input type="text" name="end_time" id="end_time" value="{{end_time}}" lay-verify=""
+			   placeholder="yyyy-MM-dd" autocomplete="off"
+			   class="layui-input">
+      </div>
+    </div>
+	  <div class="layui-inline">
+      <label class="layui-form-label">部门</label>
+      <div class="layui-input-inline">
+        <select name="dep_name" lay-verify=""  lay-filter="dep_name">
+
+                        </select>
+      </div>
+    </div>
+			 <div class="layui-inline">
+      <label class="layui-form-label">职位</label>
+      <div class="layui-input-inline">
+        <select name="position_name" lay-verify="" lay-filter="position_name">
+
+		</select>
+      </div>
+    </div>
+  <div class="layui-inline">
+		<div class="layui-input-inline">
+			<button class="layui-btn" id="searchBtn" lay-submit
+				lay-filter="formDemo" data-type="reload" style="margin-left: 15px">
+				<i class="layui-icon layui-icon-search"></i> 查询
+			</button>
+			</div>
+	</div>
+
+
+  </div>
+
+
+	</form>
+
+
+	<!-- 下面写内容 -->
+	<table class="layui-table" lay-filter="mylist" lay-size="lg">
+		<thead>
+			<tr>
+				<th lay-data="{type:'checkbox',fixed:'left'}"></th>
+				<th lay-data="{field:'id',hide:'true', align:'center',width:160}">id</th>
+				<th lay-data="{field:'dep_name', align:'center',width:160}">部门名称</th>
+				<th lay-data="{field:'username',align:'center', minWidth:170}">员工账号</th>
+				<th lay-data="{field:'name',align:'center', minWidth:170}">员工姓名</th>
+				<th lay-data="{field:'position_name',align:'center',minWidth:260}">部门职位</th>
+				<th lay-data="{field:'job_no',align:'center',minWidth:130}">工号</th>
+				<th lay-data="{field:'sex',align:'center',width:130}">性别</th>
+                <th lay-data="{field:'power',align:'center',minWidth:130}">权限</th>
+				<th lay-data="{field:'img',align:'center',minWidth:100}">简历图片</th>
+				<th lay-data="{field:'create_time',align:'center',minWidth:260}">入职时间</th>
+				{% if power == '1' %}
+				<th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+		{% for item in management_list %}
+			<tr>
+				<td></td>
+				<td>{{ item.id }}</td>
+                <td>{{ item.dep_name }}</td>
+				<td>{{ item.username }}</td>
+				<td>{{ item.name }}</td>
+                <td>{{ item.position_name }}</td>
+                <td>{{ item.job_no }}</td>
+                <td>{{ item.sex }}</td>
+                <td>{{ item.power }}</td>
+				<td><a href="#" class="jianl_list_img"
+					   onclick=" YuanG_IMG('{{ item.img }}')"><img src="{{ item.img }}"></a></td>
+				<td>{{ item.create_time}} </td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+	<script type="text/html" id="barDemo">
+		{% if power == '1' %}
+		<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		{% endif %}
+	</script>
+</div>
+<script type="text/html" id="toolbarDemo">
+	<div class="layui-btn-container" id="add_management" >
+		<button  class="layui-btn layui-btn-sm" lay-event="add_management">入职</button>
+	</div>
+</script>
+<script type="text/javascript">
+
+	$(function(){
+		var power = '{{power}}';
+
+		var end_time = '{{end_time}}'
+
+		if (power !== '1') {
+			$("#add_management").hide();
+			$("#add_management").hide();
+		}
+
+		if(!end_time){
+			var myDate = new Date();
+			year = myDate.getFullYear();
+			month = myDate.getMonth() + 1;
+			day = myDate.getDate();
+			//$("#end_time").val(year+'年'+month+'月'+day+'日');
+		}
+
+
+
+	})
+	layui.use(['form', 'layedit', 'laydate'], function(){
+      var form = layui.form
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+      laydate.render({
+					elem: '#start_time', //指定元素
+
+					format: 'yyyy年MM月dd日',
+					done: function(start_time, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+						end_time = $("#end_time").val();
+						if(start_time>end_time && end_time != ''){
+
+							layui.layer.msg('开始时间必须小于结束时间')
+							$("#start_time").val('');
+						}
+					}
+	 });
+	 laydate.render({
+					elem: '#end_time', //指定元素
+
+					format: 'yyyy年MM月dd日',
+					done: function(end_time, date, endDate){//控件选择完毕后的回调---点击日期、清空、现在、确定均会触发。
+						start_time = $("#start_time").val();
+						if(start_time>end_time){
+							layui.layer.msg('结束时间必须大于开始时间')
+							$("#end_time").val('');
+						}
+					}
+
+
+	 });
+	 	var pos_id = '{{position_id}}';
+		var dep_id = '{{dep_id}}';
+
+		$.ajax({
+			url:'/management/get_position',
+			type:'post',
+			dataType:'text',
+			contentType: 'application/json',
+			timeout:3000,
+			data:JSON.stringify({'dep_id':dep_id}),
+
+			success:function(data){
+
+				res = JSON.parse(data);
+				position = res['position'];
+				department = res['department'];
+				var html0 = '';
+				$.each(department,function(i){
+
+					department_id = department[i]['pk']
+					department_name = department[i]['fields']['name']
+					if (department_id == dep_id){
+						html1 += "<option value = '"+ department_id +"'>" + department_name  + "</option>";
+					}
+				});
+				html1 += "<option value = ''>所有部门</option>";
+				$.each(department,function(i){
+
+					department_id = department[i]['pk']
+					department_name = department[i]['fields']['name']
+					if (department_id != dep_id){
+						html1 += "<option value = '"+ department_id +"'>" + department_name  + "</option>";
+					}
+				});
+
+				$("select[name=dep_name]").empty();
+				$("select[name=dep_name]").append(html1);
+
+
+				var html1 = '';
+				$.each(position,function(i){
+					position_id = position[i]['pk']
+					position_name = position[i]['fields']['name']
+					if (position_id == pos_id){
+						html1 += "<option value = '"+ position_id +"'>" + position_name  + "</option>";
+					}
+				});
+				html1 += "<option value = ''>所有职位</option>";
+				$.each(position,function(i){
+					position_id = position[i]['pk']
+					position_name = position[i]['fields']['name']
+					if (position_id != pos_id){
+						html1 += "<option value = '"+ position_id +"'>" + position_name  + "</option>";
+					}
+				});
+
+				$("select[name=position_name]").empty();
+				$("select[name=position_name]").append(html1);
+				form.render();
+
+			},
+			error:function () {
+
+				alert('获取职位失败');
+			}
+		});
+
+
+
+      form.render();
+
+      form.on('select(dep_name)',function(data){
+          var dep_id = data.value;
+          $.ajax({
+				url:'/management/get_position',
+				type:'post',
+				dataType:'text',
+				contentType: 'application/json',
+				timeout:3000,
+				data:JSON.stringify({'dep_id':dep_id}),
+
+				success:function(data){
+
+					res = JSON.parse(data);
+					json = res['position'];
+					var html1 = '';
+					html1 += "<option value = ''>所有职位</option>";
+					$.each(json,function(i){
+						position_id = json[i]['pk']
+						position_name = json[i]['fields']['name']
+						html1 += "<option value = '"+ position_id +"'>" + position_name  + "</option>";
+					});
+
+
+					form.render();
+
+					$("select[name=position_name]").empty();
+					$("select[name=position_name]").append(html1);
+					form.render();
+
+				},
+				error:function () {
+
+					alert('获取职位失败');
+				}
+          });
+
+      });
+
+    });
+
+	//静态表格
+    layui.use('table',function(){
+    	var table = layui.table;
+    	var count = parseInt('{{count}}');
+		//转换静态表格
+		table.init('mylist', {
+		  height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+		  ,count: count //数据总数 服务端获得
+		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+		  ,page:true //开启分页
+		  ,toolbar: '#toolbarDemo'//工具栏
+		  ,defaultToolbar:['filter', 'exports']
+		  ,limits:[5, 10, 15, 20, 50]//分页显示每页条目下拉选择
+		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+		});
+		//监听行工具事件
+		table.on('tool(mylist)', function(obj){ //注：tool 是工具条事件名，mylist 是 table 原始容器的属性 lay-filter="对应的值"
+			var data = obj.data //获得当前行数据
+			,layEvent = obj.event; //获得 lay-event 对应的值
+			if(layEvent === 'del'){
+			    layer.confirm('真的删除行么', function(index){
+				    obj.del(); //删除对应行（tr）的DOM结构
+				    layer.close(index);
+				    //向服务端发送删除指令
+				    $.ajax({
+						url:'/management/delete',
+						type:'post',
+						dataType:'text',
+						contentType: 'application/json',
+						timeout:3000,
+						data:JSON.stringify(data),
+
+						success:function(){
+
+							layui.layer.close(loading);
+						},
+						error:function () {
+
+							layui.layer.close(loading);
+						}
+            		});
+			    });
+			} else if(layEvent === 'edit'){
+				job_no = data['job_no'];
+				if (!job_no){
+					layer.msg('请先入职再对员工信息进行修改');
+					return false;
+				}
+			    id = data['id'];
+				path = '/management/update_management';
+				path += '?id=' + id;
+				window.location.href = path;
+			}
+		});
+		 //监听头工具栏事件
+		 table.on('toolbar(mylist)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+                switch(obj.event){
+                case 'add_management':
+                    if(data.length !== 1){
+                    	layer.msg('请选择一行');
+                    } else {
+                    	job_no = data[0]['job_no'];
+                    	if (job_no){
+                    		layer.msg('该员工已入职');
+                    		return false;
+                    	}
+						id = data[0]['id'];
+						path = '/management/add_management';
+						path += '?id=' + id;
+						window.location.href = path;
+                    }
+                break;
+                };
+            });
+	});
+	  //  iframe层  详情信息
+    function YuanG_IMG(src){
+    	var imgHtml = "<img src='"+src+"' />";
+        //iframe层
+        layer.open({
+            type: 1,//
+            title: "简历图片",//标题
+            closeBtn: 1, //不显示关闭按钮
+            shade: [0.3],//遮罩
+            skin: 'demo_class_color',//iframe皮肤
+            shadeClose:Boolean,//点击遮罩关闭
+            area: ['800px', '460px'],
+            //offset: 'cb', //右下角弹出
+            //time: 2000, //2秒后自动关闭
+            anim: 5,//动画
+            content: imgHtml, //iframe的url，no代表不显示滚动条
+        });
+
+    }
+</script>
+
+
+</body>
+
+</html>

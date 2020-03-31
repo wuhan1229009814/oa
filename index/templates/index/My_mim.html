@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+            <span>修改密码</span>
+        </div>
+        <!-- 内容 -->    
+        <div class="wenxts_ke">
+            <p><i>温馨提示：</i>修改密码后请牢记新密码，避免忘记密码影响工作进程</p>
+        </div>  
+        <!-- 下面写内容 -->
+        <div class="kehubh_tj_k">
+            <form class="layui-form layui-form-pane" action="/index/my_mim" method="post">
+            <ul> 
+                <li >
+                    <div class="left">账号：</div>
+                    <div class="right">
+                        <div style="margin: 10px 0 0 15px" >{{ user.username }}</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="left">原密码：</div>
+                    <div class="right"> 
+                        <input type="password" name="old_pwd" required lay-verify="required" placeholder="请输入原密码" autocomplete="off" class="layui-input">
+                    </div>
+                </li>
+                <li>
+                    <div class="left">新密码：</div>
+                    
+                    <div class="right"> 
+                        <input type="password"  name="new_pwd_1" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" >
+                    </div>
+                    <span class="cpwdinfo"> </span>
+                </li>
+                <li>
+                    <div class="left">确认新密码：</div>
+                    <div class="right"> 
+                        <input type="password" name="new_pwd_2" required lay-verify="required" placeholder="请输入新密码" autocomplete="off" class="layui-input" >
+                    </div>
+                    <span class="cpwdinfo"></span>
+                </li>
+                <li>
+                    <div class="left"> &nbsp;</div>
+                    <div class="right"> 
+                        <button class="button_qr">确定</button>
+                    </div>
+                </li>
+            </ul> 
+            </form>
+        </div>
+    </div>
+    <div class="open_shrink open" title="展开/收起">
+				<span></span>
+			</div>
+			<script type="text/javascript">
+				$(function(){
+                    var msg = '{{msg}}';
+                    if(msg ){
+                        alert(msg);
+                    }
+
+					$(".open_shrink").click(function(){
+						if ($(this).hasClass("open")) {
+							$(this).removeClass("open");
+							$(".layui-side").stop().animate({left:-220},300);
+							$(".layui-body").stop().animate({left:0},300);
+						}else{
+							$(this).addClass("open");
+							$(".layui-side").stop().animate({left:0},300);
+							$(".layui-body").stop().animate({left:220},300);
+						}
+					})
+				});
+
+			</script>
+    <!-- layui js -->
+
+    <script src="/static/js/layui.js"></script>
+</body>
+</html>
+ 

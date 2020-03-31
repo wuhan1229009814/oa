@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a>首页</a>
+            <a>工单进程</a> 
+            <span>我的工单</span>
+        </div>
+        <!-- 筛选 --> 
+        <div class="shuaix">
+            <ul class="gongdan_list_top">
+                <li><a href="#" class="color1">所有</a></li>
+                <li><a href="#" class="color2">待制作</a></li>
+                <li><a href="#" class="color3">制作中</a></li>
+                <li><a href="#" class="color4">待确认</a></li>
+                <li><a href="#" class="color5">修改中</a></li> 
+                <li><a href="#" class="color6">已完成</a></li> 
+            </ul>
+            <!-- <div class="center">统计：【大：20 中：30 小：60】</div> -->
+            <div class="right">
+                <input type="text" placeholder="贵州华盛名酒销售有限公司">
+                <a href="#">查询</a>
+            </div>
+        </div>
+        <!-- 下面写内容 -->
+        <table class="layui-table" lay-filter="mylist" lay-size="lg">
+            <thead>
+                <tr>  
+                    <th lay-data="{field:'yx', align:'center',width:160}">所属人</th>
+                    <th lay-data="{field:'time',align:'center', minWidth:190}">单位名称</th>
+                    <th lay-data="{field:'www',align:'center',minWidth:180}">ftp/域名</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:98}">ID号</th>
+                    <th lay-data="{field:'user',align:'center',width:120}">产品类型</th>
+                    <th lay-data="{field:'tel',align:'center',width:130}">注册日期</th>
+                    <th lay-data="{field:'result',align:'center',minWidth:160}">制作人员</th>
+                    <th lay-data="{field:'addr',align:'center',minWidth:120}">制作进度</th> 
+                    <th lay-data="{field:'addr1',align:'center',minWidth:190}">昨日进度</th> 
+                    <th lay-data="{field:'addr2',align:'center',minWidth:220}">领导意见</th> 
+                    <th lay-data="{field:'option',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}">操作</th>
+                </tr> 
+            </thead>
+            <tbody> 
+                <tr>  
+                  
+                    <td> 谭振中 杨奇林 </td>
+                    <td>贵州万家美装饰有限公司</td>
+                    <td>gzzsgcgs.com</td>
+                    <td>8558899</td>
+                    <td>全网营销</td>
+                    <td>2019-02-05</td>
+                    <td>肖韦 胡绪雪</td>
+                    <td>制作中</td>
+                    <td>制作中，公众号已注册</td>
+                    <td>已超时，请加快进度</td>
+                    <td><a href="#" class="jianl_list_img" onclick=" YuanG_IMG()"><img src="images/jl.jpg"></a></td>  
+                   
+                </tr>  
+            </tbody>  
+            <script type="text/html" id="barDemo">
+                <a  href="GongDJC_my1.html"  class="layui-btn layui-btn-xs main_self_frame"  lay-event="edit">详情</a> 
+            </script> 
+        </table> 
+    </div>  
+    <!-- layui js -->
+    <script src="layui/layui.js"></script>
+</body>
+
+</html>
+<script type="text/javascript">
+	//静态表格
+    layui.use('table',function(){
+            var table = layui.table;
+            //转换静态表格
+            table.init('mylist', {
+                height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+                ,count: 50 //数据总数 服务端获得
+                ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+                ,page:true //开启分页 
+                // ,toolbar: '#toolbarDemo' //指向自定义工具栏模板选择器 
+                ,defaultToolbar:['filter', 'exports']
+                ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+                ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+            }); 
+            //监听行工具事件 
+        });
+</script> 
+

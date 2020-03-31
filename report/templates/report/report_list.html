@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit"/>
+	<meta name="force-rendering" content="webkit"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="名榜,wangid">
+	<title>WangID办公管理系统</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/static/css/style.css">
+	 <link rel="stylesheet" href="/static/css/children.css">
+
+	<!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- layui css -->
+
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="/static/css/laydate.css" media="all">
+	<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+	<!-- layui js -->
+	<script src="/static/js/layui.js"></script>
+	<script src="/static/js/layui.all.js"></script>
+	<style>
+		.btn{
+			background-color: #0E7FF9;
+			width: 50px;
+			height: 30px;
+			border-radius: 3px;
+			color: wheat;
+		}
+	</style>
+</head>
+
+<body>
+<div class="wangid_conbox">
+	<!-- 当前位置 -->
+	<div class="zy_weizhi bord_b">
+		<i class="fa fa-home fa-3x"></i>
+		<a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+		<span>工作报告</span>
+	</div>
+	<!-- 筛选 -->
+	<div class="shuaix">
+		<div class="right">
+			<a href="/report/add">添加</a>
+		</div>
+	</div>
+	<!-- 下面写内容 -->
+	<table class="layui-table" lay-filter="mylist" lay-size="lg">
+		<thead>
+			<tr>
+				<th lay-data="{type:'checkbox',fixed:'left'}"></th>
+				<th lay-data="{field:'id',hide:'true', align:'center',width:50}">id</th>
+				{% if user.power %}
+					<th lay-data="{field:'name',align:'center', minWidth:100}">姓名</th>
+					<th lay-data="{field:'dep_name',align:'center', minWidth:100}">部门</th>
+				{% endif %}
+				<th lay-data="{field:'position_name',align:'center', minWidth:170}">标题</th>
+				<th lay-data="{field:'www',align:'center',minWidth:300}">内容</th>
+				<th lay-data="{field:'time',align:'center',minWidth:170}">创建时间</th>
+				<th lay-data="{field:'create_time',align:'center',minWidth:170}">修改时间</th>
+
+				<th lay-data="{field:'power',align:'center',width:130,toolbar:'#barDemo',fixed: 'right'}" style="text-align: center">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in lis %}
+			<tr>
+				<td></td>
+				<td>{{ forloop.counter }}</td>
+				{% if user.power %}
+                	<td>{{ item.management.name }}</td>
+                	<td>{{ item.management.dep_name }}</td>
+				{% endif %}
+                <td>{{ item.title }}</td>
+				<td>{{ item.content }}</td>
+                <td>{{ item.created_time }}</td>
+				<td>{{ item.updated_time }}</td>
+				<td>
+					<a href="/report/update/{{ item.id }}">
+						<button class="btn">
+							修改
+						</button>
+					</a>
+				</td>
+				<td>
+					<a href="/report/delete/{{ item.id }}" onclick="return confirm('是否删除?')">
+						<button class="btn">
+							删除
+						</button>
+					</a>
+				</td>
+			</tr>
+			<script type="text/html" id="barDemo">
+				<a class="layui-btn layui-btn-xs" lay-event="edit" href="/report/update/{{ item.id }}">修改</a>
+				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" href="/report/delete/{{ item.id }}" onclick="return confirm('是否删除?')">删除</a>
+			</script>
+			{% endfor %}
+		</tbody>
+	</table>
+
+</div>
+<script type="text/javascript">
+	//静态表格
+    layui.use('table',function(){
+    	var table = layui.table;
+		//转换静态表格
+		table.init('mylist', {
+		  height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+		  ,count: 50 //数据总数 服务端获得
+		  ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+		  ,page:true //开启分页
+		  ,toolbar: 'False'//工具栏
+		  ,defaultToolbar:['filter', 'exports']
+		  ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+		  ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+		});
+
+	});
+</script>
+</body>
+</html>

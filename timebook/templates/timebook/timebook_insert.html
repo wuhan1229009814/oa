@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="/static/css/laydate.css" media="all">
+	<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+	<!-- layui js -->
+	<script src="/static/js/layui.js"></script>
+	<script src="/static/js/layui.all.js"></script>
+</head>
+<style>
+
+input[readonly]{
+    background-color: #efefef;
+}
+</style>
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a href="/index/index">首页</a>
+            <a>员工管理</a>
+            <span>公司员工添加</span>
+        </div>
+        <!-- 内容 -->
+        <div class="wenxts_ke">
+            <p><i>温馨提示：</i>请认真核对员工信息正确无误后再确定添加</p>
+        </div>
+        <div class="kehubh_tj_k">
+            <form class="layui-form layui-form-pane" action="/timebook/insert" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <input type="text" name="id" value="{{management.id}}" style="display:none">
+                <ul>
+
+
+                <li>
+                    <div class="left">姓名：</div>
+
+                    <div class="right">
+                        <input type="text" name="name" required lay-verify="required" value="{{name}}"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="left">日期：</div>
+                    <div class="right">
+                        <input type="date" name="date" id="time1" required lay-verify="required"
+                                autocomplete="on" class="layui-input">
+                    </div>
+                </li>
+                <li style="height: 38px; overflow:initial;">
+                    <div class="left">出勤状态：</div>
+                    <div class="right">
+                        <select name="present_statu" lay-verify=""  lay-filter="present_statu" class="layui-select">
+                            <option value=""  >请选择出勤状态</option>
+                            {% for item in statu_list %}
+					            <option value="{{item}}">{{item}}</option>
+				            {% endfor %}
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <div class="left">备注：</div>
+
+                    <div class="right">
+                        <textarea name="comment" id="" cols="30" rows="10" class="layui-textarea"></textarea>
+                    </div>
+                </li>
+                <li>
+                    <div class="left"> :</div>
+
+                    <div class="right">
+                        <input type="submit" required lay-verify="required" value="提交"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </li>
+        </ul>
+            </form>
+            </div>
+        </div>
+<script>
+		/*获取当前时间*/
+     var time = new Date();
+     /*格式化日，如果小于9，则补0*/
+     var day = ("0" + time.getDate()).slice(-2);
+     /*格式化月，如果小于9，则补0*/
+     var month = ("0" + (time.getMonth() + 1)).slice(-2);
+     /*拼接日期*/
+     var today = time.getFullYear() + "-" + (month) + "-" + (day);
+     /*完成赋值操作*/
+     document.getElementById("time1").value=today
+</script>
+
+</body>
+
+</html>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+      var form = layui.form
+      ,layer = layui.layer
+      ,layedit = layui.layedit
+      ,laydate = layui.laydate;
+      form.render();
+
+
+      form.on('select(dep_name)',function(data){
+          var dep_id = data.value;
+          $.ajax({
+            url:'/management/get_position',
+            type:'post',
+            dataType:'text',
+            contentType: 'application/json',
+            timeout:3000,
+            data:JSON.stringify({'dep_id':dep_id}),
+
+            success:function(data){
+
+                res = JSON.parse(data);
+                json = res['position'];
+                var html1 = '';
+                $.each(json,function(i){
+                    position_id = json[i]['pk']
+                    position_name = json[i]['fields']['name']
+                    html1 += "<option value = '"+ position_id +"'>" + position_name  + "</option>";
+                });
+                form.render();
+
+                $("select[name=position_name]").empty();
+                $("select[name=position_name]").append(html1);
+                form.render();
+
+            },
+            error:function () {
+
+                alert('获取职位失败');
+            }
+          });
+
+      })
+    });
+
+</script>

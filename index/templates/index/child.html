@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>大内高手管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+	<link rel="stylesheet" href="/static/css/layui.css">
+    <script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body class="layui-layout-body control_box">
+	<!-- 背景 -->
+	<div class="bg_box" style="background: url(/static/imgs/20190415.jpg) no-repeat center center; background-size: cover;"></div>
+	<!-- content box-->
+	<div class="layui-layout layui-layout-admin">
+		<!-- top -->
+		<div class="layui-header">
+			<div class="top_box">
+            <marquee width=400 scrollamount=4>
+                <a href='/index/index'>
+                    <FONT face=楷体_GB2312 color=yellow size=5>
+                        <STRONG>OA管理系统</STRONG>
+                </a>
+            </marquee>   <div class="logo">
+	        	<img src="/static/images/logo_touming.gif">
+	        </div>
+				<div class="top_user">
+					<span><img src="{{management.img}}" ></span>
+					<dl>
+						<dt>{{management.name}}</dt>
+						<dd>部门：{{management.dep_name}} 上次登录时间：{{ip_info.login_time}}</dd>
+					</dl>
+				</div>
+
+		        <div class="top_icon">
+		        	<a href="/index/index" title="首页"><img src="/static/images/top_home.png"></a>
+		        	<a href="/index/childapp=index&info=my_info" title="个人设置"><img src="/static/images/top_person.png"></a>
+		        	<a href="/user/logout" title="退出"><img src="/static/images/top_exit.png"></a>
+		        </div>
+		    </div>
+		</div>
+	    <!-- side menu -->
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree"  lay-filter="test">
+					<li class="layui-nav-item">
+						<a href="/index/childapp=address_book&info=list"><i class="fa fa-address-book fa-fw"></i>通讯录</a>
+<!--						<dl class="layui-nav-child">-->
+<!--							<dd><a href="vip_luru.html" target="main_self_frame">VIP客户信息录入</a></dd>-->
+<!--							<dd><a href="vip_list.html" target="main_self_frame">VIP客户信息列表</a></dd>-->
+<!--						</dl>-->
+					</li>
+					<li class="layui-nav-item">
+						<a href="/index/childapp=timebook&info=list"><i class="fa fa-shield fa-fw"></i>考勤记录</a>
+<!--						<dl class="layui-nav-child">-->
+<!--							<dd><a href="KeHuBH_tj.html"  target="main_self_frame">添加保护系统</a></dd>-->
+<!--							<dd><a href="KeHuBH_list.html"  target="main_self_frame">我的保护系统列表</a></dd>-->
+<!--							<dd><a href="KeHuBH_list1.html"  target="main_self_frame">员工保护系统列表</a></dd>-->
+<!--						</dl>-->
+					</li>
+					<li class="layui-nav-item">
+						<a href="/index/childapp=notice&info=list"><i class="fa fa-address-card fa-fw"></i>通知公告</a>
+<!--						<dl class="layui-nav-child">-->
+<!--							<dd><a href="HuiFangJL_tj.html" target="main_self_frame">添加回访记录</a></dd>-->
+<!--							<dd><a href="HuiFangJL_my.html" target="main_self_frame">我的回访记录</a></dd>-->
+<!--						</dl>-->
+					</li>
+					<li class="layui-nav-item">
+						<a href="#"><i class="fa fa-file-text fa-fw"></i>工作报告</a>
+						<dl class="layui-nav-child">
+							<dd><a href="/index/childapp=report&info=list">查询报告</a></dd>
+							<dd><a href="/index/childapp=report&info=add">新建报告</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><i class="fa fa-users fa-fw"></i>部门员工管理</a>
+						<dl class="layui-nav-child">
+							{% if management.power == '1' %}
+							<dd><a href="/index/childapp=management&info=list" >公司员工管理</a></dd>
+							<dd><a href="/index/childapp=department&info=list" >公司部门管理</a></dd>
+							{% else %}
+							<dd><a href="/index/childapp=management&info=list" >公司员工列表</a></dd>
+							{% endif %}
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="javascript:;"><i class="fa fa-user fa-fw"></i>个人设置</a>
+						<dl class="layui-nav-child">
+							<dd><a href="/index/my_ip" target="main_self_frame">IP锁定</a></dd>
+							<dd><a href="/index/my_info" target="main_self_frame">个人信息</a></dd>
+							<dd><a href="/index/my_mim" target="main_self_frame">修改密码</a>
+<!--							<dd><a href="/index/my_bj" target="main_self_frame">背景设置</a></dd>-->
+						</dl>
+					</li>
+							<li class="layui-nav-item">
+						<a href="javascript:;"><i class="fa fa-legal fa-fw"></i>游戏管理</a>
+						<dl class="layui-nav-child">
+							<dd><a href="/game/index" target = "_blank">愤怒的小鸡鸡</a></dd>
+						</dl>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="layui-body">
+			<!-- 展开收起按钮 -->
+			<div class="open_shrink open" title="展开/收起">
+				<span></span>
+			</div>
+
+
+			<!-- iframe -->
+			<iframe id= "child_frame"  name="main_self_frame" frameborder="0"
+					class="layadmin-iframe"
+					scrolling="yes"></iframe>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+
+				$(function(){
+					var app = '{{app}}';
+					var info = '{{info}}';
+					var id = '{{id}}';
+					var src = '/' + app + '/' + info;
+					if (id){
+						src += '?id=' + id;
+					}
+					$("#child_frame").attr('src',src);
+
+
+					$(".open_shrink").click(function(){
+						if ($(this).hasClass("open")) {
+							$(this).removeClass("open");
+							$(".layui-side").stop().animate({left:-220},300);
+							$(".layui-body").stop().animate({left:0},300);
+						}else{
+							$(this).addClass("open");
+							$(".layui-side").stop().animate({left:0},300);
+							$(".layui-body").stop().animate({left:220},300);
+						}
+					})
+				})
+			</script>
+	<!-- layui js -->
+	<script src="/static/js/layui.js"></script>
+	<script src="/static/js/element.js">
+		//JavaScript代码区域
+		layui.use('element', function(){
+		  var element = layui.element;
+
+		});
+
+	</script>
+
+</body>
+
+</html>
+

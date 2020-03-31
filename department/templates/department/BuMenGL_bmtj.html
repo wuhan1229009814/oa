@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+	<link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="/static/css/laydate.css" media="all">
+	<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+	<!-- layui js -->
+	<script src="/static/js/layui.js"></script>
+	<script src="/static/js/layui.all.js"></script>
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+            <span>公司部门添加修改</span>
+        </div>
+        <!-- 内容 -->    
+        <div class="wenxts_ke">
+            <p><i>温馨提示：</i>按需添加公司部门</p>
+        </div>
+        <div class="kehubh_tj_k">
+            <form class="layui-form layui-form-pane" action="/department/add_department" method="post">
+            <ul>  
+                <li>
+                    <div class="left">部门名称：</div>
+                    <div class="right"> 
+                        <input type="text" id = "dep_name"name="dep_name" required lay-verify="required"
+                               placeholder="请输入部门名称"
+                               autocomplete="on" class="layui-input">
+                    </div>
+                </li>
+                <li>
+                    <div class="left"> &nbsp;</div>
+                    <div class="right"> 
+                        <button class="button_qr"  id="add_department">确定添加</button>
+                    </div>
+                </li>
+            </ul> 
+            </form>
+        </div>
+    </div>   
+    
+	<!-- houl --> 
+	<!-- 结束 -->
+    <!-- layui js -->
+
+
+</body>
+
+</html>
+<script>
+$(function(){
+    var msg = '{{msg}}';
+    if (msg){
+        alert(msg);
+    }
+
+    $("#add_department").click(function(){
+        var flag = 'true'
+
+        if (!$("#dep_name").val()){
+            flag = 'false';
+        }
+
+        if (flag == 'true'){
+            var loading = layui.layer.msg('正在添加', {icon: 16, shade: 0.3, time:0});
+            $.ajax({
+                url:'/department/add_department',
+                type:'post',
+                dataType:'text',
+                contentType: 'application/json',
+                timeout:3000,
+                success:function(){
+                    layui.layer.close(loading);
+                },
+                error:function () {
+                    layui.layer.close(loading);
+                }
+            });
+        }
+
+
+
+    });
+});
+layui.use(['form', 'layedit', 'laydate'], function(){
+    var form = layui.form
+    ,layer = layui.layer
+    ,layedit = layui.layedit
+    ,laydate = layui.laydate;
+
+});
+layui.use('laydate', function(){
+  var laydate = layui.laydate;
+  //年选择器
+  laydate.render({
+    elem: '#test2'
+  });
+   //时间选择器
+   laydate.render({
+    elem: '#test2_r'
+    ,type: 'time'
+  });
+});
+
+
+</script>

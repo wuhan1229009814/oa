@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>WangID办公管理系统</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a>首页</a>
+            <a>VIP客户信息管理</a>
+            <span>VIP客户信息录入</span>
+        </div>
+        <!-- 内容 -->    
+		<div class="tianjia_xx vip_luru">
+			<table class="if_tianjiatext layui-table"   lay-size="lg"> 
+				<tbody>
+					<tr>
+						<td class="td_1">公司名称</td> 
+						<td><input type="text" placeholder="驰通科技集团股份有限公司"></td>
+						<td class="td_1 td_border">ID号</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">产品类型</td> 
+						<td>
+							<div class="layui-input-inline">
+								<select name="quiz1">
+									<option value="请选择产品类型">请选择产品类型</option>
+									<option value="产品类型">产品类型</option>
+									<option value="产品类型1">产品类型1</option>  
+									<option value="产品类型2">产品类型2</option> 
+								</select>
+							</div>
+						</td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">密码</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">合同金额</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">充值</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">联系人</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">电话</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">QQ</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">地址</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">所有人</td> 
+						<td>
+							<ul class="suoyour">
+								<li>
+									<div class="layui-input-inline">
+										<select name="quiz1">
+											<option value="请选择分区">请选择分区</option>
+											<option value="一区">一区</option>
+											<option value="一区1">一区1</option>  
+											<option value="一区2">一区2</option> 
+										</select>
+									</div>
+								</li>
+								<li>
+									<div class="layui-input-inline">
+										<select name="quiz1">
+											<option value="选择所有人">选择所有人</option>
+											<option value="大陆">大陆</option>
+											<option value="大黄">大黄</option>  
+											<option value="大陆2">大陆2</option> 
+										</select>
+									</div>
+								</li>
+							</ul>
+						</td>
+						<td class="td_1 td_border">合同编号</td> 
+						<td><input type="text" placeholder="CHITONG201"></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">签署日期</td> 
+						<td> 
+							<input type="text" class="layui-input"  id="test1" placeholder="yyyy-MM-dd">
+						</td>
+						<td class="td_1 td_border">续费日期</td> 
+						<td>
+							<input type="text" class="layui-input"  id="test2" placeholder="yyyy-MM-dd">
+						</td>
+						<td class="td_1 td_border">收发编号</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">续费金额</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">续费金额明细</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">补米</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">制作人员</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">确认函</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">效果</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">备案号</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">注册日期</td> 
+						<td>
+							<input type="text" class="layui-input"  id="test3" placeholder="yyyy-MM-dd">
+						</td>
+						<td class="td_1 td_border">回访记录</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">客服质量分</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">项目完成成绩</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">备注</td> 
+						<td><input type="text" placeholder=""></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">微网信息</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">续费通知</td> 
+						<td><input type="text" placeholder=""></td>
+						<td class="td_1 td_border">图片</td> 
+						<td><input type="file"></td>
+					</tr> 
+					<tr>
+						<td class="td_1 td_border">特殊说明</td> 
+						<td>
+							<textarea name="" cols="30" rows="4"></textarea>
+						</td>
+						<td class="td_1 td_border">特殊说明</td> 
+						<td><textarea name="" cols="30" rows="4"></textarea></td>
+						<td class="td_1 td_border">SEO关键词</td> 
+						<td><textarea name="" cols="30" rows="4"></textarea></td>
+					</tr> 
+					<tr class="tianjie_button">
+						<td colspan="6" style="border-right:1px solid #e6e6e6;">
+							<button>保存信息</button>
+							<button>取消</button>
+						</td>  
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>  
+	
+	<!-- houl --> 
+	<!-- 结束 -->
+    <!-- layui js -->
+    <script src="layui/layui.js"></script>
+    
+</body>
+
+</html>
+
+
+<script>
+layui.use('laydate', function(){
+  var laydate = layui.laydate; 
+  //常规用法
+  laydate.render({
+    elem: '#test1'
+  });
+   //常规用法
+   laydate.render({
+    elem: '#test2'
+  });
+   //常规用法
+   laydate.render({
+    elem: '#test3'
+  });
+});
+</script>
+

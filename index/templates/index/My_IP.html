@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>我的IP</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+            <span>ip锁定</span>
+        </div>
+        <!-- 筛选 -->
+	<div class="shuaix">
+        <div class="right">
+            <input type="text" placeholder="请输入关键词查询" name="query">
+            <a href="">查询</a>
+        </div>
+    </div>
+        <!-- 下面写内容 -->
+        <table class="layui-table" lay-filter="mylist" lay-size="lg">
+            <thead>
+                <tr>
+                    <th lay-data="{field:'www',align:'center',Width:170}">ID</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:130}">用户</th>
+                    <th lay-data="{field:'company',align:'center',minWidth:130}">用户IP</th>
+                    <th lay-data="{field:'user',align:'center',minWidth:130}">最新登录时间</th>
+                    <th lay-data="{field:'user',align:'center',minWidth:130}">入职时间</th>
+                    <th lay-data="{field:'tel',align:'center',minWidth:130}">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+<!--                <tr>-->
+<!--                    <td>{{ user_ip_info.id }}</td>-->
+<!--                    <td >{{ user_ip_info.username }}</td>-->
+<!--                    <td>{{ user_ip_info.id_adress }}</td>-->
+<!--                    <td>解锁此IP</td>-->
+<!--                    <td>解锁此IP</td>-->
+<!--                </tr>-->
+        {% for item in page %}
+			<tr>
+				<td>{{ item.id }}</td>
+				<td>{{ item.uname }}</td>
+				<td>{{ item.ip_adress }}</td>
+                <td>{{ item.login_time }}</td>
+                <td>{{ management.create_time }}</td>
+                {% if item.isAticv == 0 %}
+                <td><button class = "bind_cancel" ip = "{{ item.ip_adress }}" username = "{{ item.uname }}" type="button"
+                            class="layui-btn">解除绑定</button></td>
+                {% else %}
+                <td><button class = "bind_ip" ip = "{{ item.ip_adress }}" username = "{{ item.uname }}" type="button" class="layui-btn">绑定ip</button></td>
+                {% endif %}
+			</tr>
+        {% endfor %}
+
+            </tbody>
+        </table>
+        <div style="text-align: center">
+	{% if page.has_previous %}
+			<a href="/index/my_ip?page={{ page.previous_page_number }}">上一页</a>
+		{% else %}
+			上一页
+		{% endif %}
+
+		{% for p in paginator.page_range %}
+			{% if p == page.number %}
+				{{ p }}
+			{% else %}
+				<a href="/index/my_ip?page={{ p }}">{{ p }}</a>
+			{% endif %}
+		{% endfor %}
+		{% if page.has_next %}
+			<a href="/index/my_ip?page={{ page.next_page_number }}">下一页</a>
+		{% else %}
+			下一页
+		{% endif %}
+	</div>
+
+    </div>
+
+   <!-- 自定义头部工具栏 --> 
+	<!-- houl七月初七己亥年 --> 
+	<!-- 结束 -->
+    <!-- layui js -->
+    <script src="/static/js/layui.js"></script>
+
+
+</body>
+
+</html> 
+<script type="text/javascript">
+    $(function(){
+        $(".bind_ip").click(function(){
+            ip = this.getAttribute('ip');
+            username = this.getAttribute('username');
+            
+            var input_ip=prompt("请填写你要绑定的ip",ip)
+            
+            if (input_ip!=null && input_ip!="") {
+                    
+                    var data = {'ip':input_ip,'uname':username}
+                    //向服务端发送删除指令
+				    $.ajax({
+						url:'/user/bindIp',
+						type:'post',
+						dataType:'text',
+						contentType: 'application/json',
+						timeout:3000,
+						data:JSON.stringify(data),
+
+						success:function(data){
+                            
+							alert('绑定成功');
+                            window.location.reload()
+						},
+						error:function (data) {
+
+							alert('绑定失败');
+						}
+            		});
+            }    
+      
+        });
+        $(".bind_cancel").click(function(){
+            username = this.getAttribute('username');
+            
+            if(confirm("确定要解除绑定？")){
+                    
+                    var data = {'uname':username}
+                    //向服务端发送删除指令
+				    $.ajax({
+						url:'/user/bind_cancel',
+						type:'post',
+						dataType:'text',
+						contentType: 'application/json',
+						timeout:3000,
+						data:JSON.stringify(data),
+
+						success:function(data){
+                            
+							alert('解除绑定成功');
+                            window.location.reload()
+						},
+						error:function (data) {
+
+							alert('解除绑定失败');
+						}
+            		});
+            }    
+      
+        });
+    })
+
+    //静态表格
+    layui.use('table',function(){
+        var table = layui.table;
+        //转换静态表格
+        table.init('mylist', {
+          height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+          ,count: 50 //数据总数 服务端获得
+          ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+          ,page:true //开启分页
+        //   ,toolbar: '#toolbarDemo'//工具栏
+          ,defaultToolbar:['filter', 'exports']
+          ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+          ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+        }); 
+      
+ 
+    }); 
+</script>

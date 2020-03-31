@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="名榜,wangid">
+    <title>个人信息</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/children.css">
+
+    <!-- 在线图标库 地址：http://fontawesome.dashgame.com/-->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- layui css -->
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="wangid_conbox">
+        <!-- 当前位置 -->
+        <div class="zy_weizhi bord_b">
+            <i class="fa fa-home fa-3x"></i>
+            <a href="#" onclick="javascript:top.location.href='/index/index'">首页</a>
+            <span>个人信息</span>
+        </div>
+        <!-- 下面写内容 -->
+        <form action="/user/update" method="post">
+        <table class="layui-table" lay-filter="mylist" lay-size="lg">
+                <tr>
+                    <th style="width: 100px"><strong>序号</strong></th>
+                    <td>{{ user.id }}</td>
+
+                </tr>
+            <tbody>
+                <tr>
+                    <th><strong>账号</strong></th>
+                    <td>{{ user.username }}</td>
+
+                </tr>
+                <tr>
+                    <th><strong>姓名</strong></th>
+                    <td>{{ management.name }}</td>
+
+                </tr>
+                <tr>
+                    <th><strong>部门</strong></th>
+                    <td>{{ management.dep_name }}</td>
+
+                </tr>
+                 <tr>
+                    <th><strong>职位</strong></th>
+                    <td>{{ management.position_name }}</td>
+
+                </tr>
+                <tr>
+                    <th><strong>手机号</strong></th>
+                    <td>{{ user.phone }}</td>
+
+                </tr>
+               <tr>
+                    <th><strong>邮箱</strong></th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th><strong>入职时间</strong></th>
+                    <td>{{ user.create_time }}</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+<!--        <button type="button" class="layui-btn"><a href="/user/update">修改个人信息</a></button>-->
+        </form>
+        <button type="button" class="layui-btn"><a href="/user/update" style="color: #00FFFF">修改个人信息</a></button>
+    </div>
+
+   <!-- 自定义头部工具栏 -->
+	<!-- houl七月初七己亥年 -->
+	<!-- 结束 -->
+    <!-- layui js -->
+    <script src="/static/js/layui.js"></script>
+
+</body>
+
+</html>
+<script type="text/javascript">
+    //静态表格
+    layui.use('table',function(){
+        var table = layui.table;
+        //转换静态表格
+        table.init('mylist', {
+          height: 'full-130' //高度最大化减去差值,也可以自己设置高度值：如 height:300
+          ,count: 50 //数据总数 服务端获得
+          ,limit: 10 //每页显示条数 注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+          ,page:true //开启分页
+        //   ,toolbar: '#toolbarDemo'//工具栏
+          ,defaultToolbar:['filter', 'exports']
+          ,limits:[10, 20, 30, 40, 50]//分页显示每页条目下拉选择
+          ,cellMinWidth: 60//定义全局最小单元格宽度，其余自动分配宽度
+        });
+
+
+    });
+</script>
