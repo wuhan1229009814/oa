@@ -7,6 +7,7 @@ from management.models import Management
 
 @logging_check
 def address_book_list(request):
+    """通讯录模块"""
     if request.method == "GET":
         users = Management.objects.all()
         all_user = []
