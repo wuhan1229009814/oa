@@ -1,3 +1,4 @@
+"""主页"""
 import os
 
 from django.core.paginator import Paginator
