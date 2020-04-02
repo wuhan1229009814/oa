@@ -9,6 +9,7 @@ from management.models import Management
 
 
 def department_list(request):
+    """部门信息"""
     position_list = Position.objects.all().order_by('dep_name')
     #分页
     count = len(position_list)
