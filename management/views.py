@@ -1,3 +1,4 @@
+"""部门管理模块"""
 import datetime
 import json
 import os
