@@ -1,3 +1,4 @@
+"""个人报告模块"""
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
