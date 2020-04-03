@@ -1,3 +1,4 @@
+"""通知公告模块"""
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from index.views import logging_check
